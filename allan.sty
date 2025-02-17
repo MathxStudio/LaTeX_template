@@ -83,9 +83,12 @@
 % for title
 \usepackage{titlesec}
 
-\titleformat{\section}{\color{black}\normalfont\fontfamily{qpl}\selectfont\huge\bfseries}{\color{allandarkblue} Section \textbf{\thesection}}{0.5cm}{}
-\titleformat{\subsection}{\color{black}\normalfont\fontfamily{qpl}\selectfont\large\bfseries}{\color{allandarkblue} \textbf{§ \thesubsection}}{0.3cm}{}
-\titleformat{ \subsubsection }{ \color{black}\normalfont\fontfamily{qpl}\selectfont\scriptsize\bfseries } {\color{allandarkblue} \textbf{\thesubsubsection}}{0.3cm}{}
+% \titleformat{\section}{\color{black}\normalfont\fontfamily{qpl}\selectfont\huge\bfseries}{\color{allandarkblue} Section \textbf{\thesection}}{0.5cm}{}
+\titleformat{\section}{\color{black}\normalfont\selectfont\huge\bfseries}{\color{allandarkblue} Section \textbf{\thesection}}{0.5cm}{}
+% \titleformat{\subsection}{\color{black}\normalfont\fontfamily{qpl}\selectfont\large\bfseries}{\color{allandarkblue} \textbf{§ \thesubsection}}{0.3cm}{}
+\titleformat{\subsection}{\color{black}\normalfont\selectfont\large\bfseries}{\color{allandarkblue} \textbf{§ \thesubsection}}{0.3cm}{}
+% \titleformat{ \subsubsection }{ \color{black}\normalfont\fontfamily{qpl}\selectfont\scriptsize\bfseries } {\color{allandarkblue} \textbf{\thesubsubsection}}{0.3cm}{}
+\titleformat{ \subsubsection }{ \color{black}\normalfont\selectfont\scriptsize\bfseries } {\color{allandarkblue} \textbf{\thesubsubsection}}{0.3cm}{}
 
 % for hyperlink
 \usepackage[colorlinks, linkcolor = allancyan, anchorcolor = allanblue, citecolor = allanblue]{hyperref}
