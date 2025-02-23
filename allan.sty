@@ -150,6 +150,7 @@
     \newcommand{\du}{^\circ}
     \newcommand{\modd}{\mathrm{mod}\:}
     \newcommand{\inv}{^{-1}}
+    \newcommand{\eps}{\varepsilon}
 
     \newcommand{\inn}[1]{\left\langle #1 \right\rangle} % inner product
 
@@ -194,6 +195,7 @@
     \newcommand{\SM}{\mathcal M}
     \newcommand{\SO}{\mathcal O}
     \newcommand{\SP}{\mathcal P}
+    \newcommand{\SU}{\mathcal U}
 
     \newcommand{\SCA}{\mathscr A}
     \newcommand{\SCB}{\mathscr B}
@@ -234,6 +236,7 @@
     \let\End\undefined
     \DeclareMathOperator{\End}{End}     % Endomorphism
     \DeclareMathOperator{\Res}{Res}     % Residue
+    \DeclareMathOperator{\Gal}{Gal}     % Galois group of extension
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -415,6 +418,43 @@
                     refname={fact, facts},
                     Refname={Fact, Facts},
                 ]{fact*}
+
+                % Definition box
+                \mdfdefinestyle{allandarkblueboxnotitle}{
+                    skipabove = 0.5cm,
+                    skipbelow = 0.5cm,
+                    leftmargin = 0cm,
+                    rightmargin = 0cm,
+                    innertopmargin = 8pt,
+                    innerbottommargin = 8pt,
+                    linewidth = 1.5pt,
+                    roundcorner = 10pt,
+                    linecolor = allandarkblue,
+                    nobreak = true,
+                    backgroundcolor = allandarkblue!8!allanblue!5,
+                }
+                \declaretheoremstyle[
+                    headfont=\bfseries\large\sffamily\color{allandarkblue},
+                    bodyfont=\normalfont,
+                    headpunct={\hspace{0.3em}---},
+                    postheadspace=0.3em,
+                    mdframed={style=allandarkblueboxnotitle},
+                ]{allandefinitiondarkbluebox}
+                \declaretheorem[
+                    style=allandefinitiondarkbluebox,
+                    name=Definition,
+                    % thmbox = M,
+                    numberwithin=section,
+                    refname={definition, definitions},
+                    Refname={Definition, Definitions},
+                ]{definition}
+                \declaretheorem[
+                    style=allanclaimorangebox,
+                    name=Definition,
+                    numbered = no,
+                    refname={definition, definitions},
+                    Refname={Definition, Definitions},
+                ]{definition*}
 
                 % Remark quotebox
                 \mdfdefinestyle{allanblackquotebox}{
