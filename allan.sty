@@ -34,6 +34,7 @@
 \newif\ifallanpkg\allanpkgtrue
 \newif\ifallanchinese\allanchinesefalse
 \newif\ifallanfancy\allanfancytrue
+\newif\ifallanbib\allanbibfalse
 
 \DeclareOption{basic}{\allanstyfalse}   % Provides basic commands only
 \DeclareOption{nothm}{\allanthmfalse}
@@ -45,6 +46,8 @@
 \DeclareOption{noauthor}{\allanauthorfalse}
 \DeclareOption{chinese}{\allanchinesetrue}
 \DeclareOption{nofancy}{\allanfancyfalse}
+\DeclareOption{bib}{\allanbibtrue}
+
 
 \ProcessOptions\relax
 
@@ -53,6 +56,7 @@
 \ifallansty\else\allanboxfalse\fi
 
 \ifallanpkg\else\allanmathfalse\fi
+\ifallanpkg\else\allanbibfalse\fi
 
 \ifallanthm\else\allanboxfalse\fi
 \ifallanmath\else\allanboxfalse\fi
@@ -142,7 +146,7 @@
     \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}       % absolute value
     \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}      % norm
     \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}   % floor function
-    \newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}   % ceiling function
+    \newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}      % ceiling function
     \newcommand{\dang}{\measuredangle}                      % directed angle
     \newcommand{\ray}[1]{\overrightarrow{#1}}               % vector / ray
     \newcommand{\seg}[1]{\overline{#1}}                     % bar / directed segment
@@ -151,6 +155,9 @@
     \newcommand{\modd}{\mathrm{mod}\:}
     \newcommand{\inv}{^{-1}}
     \newcommand{\eps}{\varepsilon}
+    \DeclareMathOperator*{\esssup}{ess\,sup}                % essential supremum
+    \DeclareMathOperator*{\essinf}{ess\,inf}                % essential infimum
+    \DeclareMathOperator*{\argmin}{arg\,min}                % argument that minimizes
 
     \newcommand{\inn}[1]{\left\langle #1 \right\rangle} % inner product
 
@@ -187,15 +194,18 @@
     \newcommand{\SA}{\mathcal A}
     \newcommand{\SB}{\mathcal B}
     \newcommand{\SC}{\mathcal C}
+    \newcommand{\SD}{\mathcal D}
     \newcommand{\SF}{\mathcal F}
     \newcommand{\SG}{\mathcal G}
     \newcommand{\SH}{\mathcal H}
     \newcommand{\SK}{\mathcal K}
     \newcommand{\SL}{\mathcal L}
     \newcommand{\SM}{\mathcal M}
+    \newcommand{\SN}{\mathcal N}
     \newcommand{\SO}{\mathcal O}
     \newcommand{\SP}{\mathcal P}
     \newcommand{\SU}{\mathcal U}
+    \newcommand{\SX}{\mathcal X}
 
     \newcommand{\SCA}{\mathscr A}
     \newcommand{\SCB}{\mathscr B}
@@ -238,6 +248,7 @@
     \DeclareMathOperator{\End}{End}     % Endomorphism
     \DeclareMathOperator{\Res}{Res}     % Residue
     \DeclareMathOperator{\Gal}{Gal}     % Galois group of extension
+    \DeclareMathOperator{\var}{var}     % variance
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -259,7 +270,7 @@
             \ifallanbox
                 \usepackage[framemethod=TikZ]{mdframed}
                 \usetikzlibrary{shadows}
-                \usepackage{transparent}
+                % \usepackage{transparent}
                 \usepackage{graphicx}
 
                 \usepackage{xparse}         % extra arguments
@@ -335,7 +346,7 @@
                     roundcorner = 10pt,
                     linecolor = allanblue,
                     nobreak = true,
-                    backgroundcolor = allanblue!5!allangreen!3,
+                    backgroundcolor = allanblue!5!,
                 }
                 \declaretheoremstyle[
                     headfont=\bfseries\large\sffamily\color{allanblue},
@@ -395,6 +406,43 @@
                     Refname={Claim, Claims},
                 ]{claim*}
 
+                % Definition box
+                \mdfdefinestyle{allandarkblueboxnotitle}{
+                    skipabove = 0.5cm,
+                    skipbelow = 0.5cm,
+                    leftmargin = 0cm,
+                    rightmargin = 0cm,
+                    innertopmargin = 8pt,
+                    innerbottommargin = 8pt,
+                    linewidth = 1.5pt,
+                    roundcorner = 10pt,
+                    linecolor = allandarkblue,
+                    nobreak = true,
+                    backgroundcolor = allandarkblue!8!allanblue!5,
+                }
+                \declaretheoremstyle[
+                    headfont=\bfseries\large\sffamily\color{allandarkblue},
+                    bodyfont=\normalfont,
+                    headpunct={\hspace{0.3em}---},
+                    postheadspace=0.3em,
+                    mdframed={style=allandarkblueboxnotitle},
+                ]{allanclaimdarkbluebox}
+                \declaretheorem[
+                    style=allanclaimdarkbluebox,
+                    name=Definition,
+                    % thmbox = M,
+                    numberwithin=section,
+                    refname={definition, definitions},
+                    Refname={Definition, Definitions},
+                ]{definition}
+                \declaretheorem[
+                    style=allanclaimdarkbluebox,
+                    name=Definition,
+                    numbered = no,
+                    refname={definition, definitions},
+                    Refname={Definition, Definitions},
+                ]{definition*}
+
                 % Fact "box"
                 \declaretheoremstyle[
                     headfont=\bfseries\large\sffamily\color{allangreen},
@@ -419,43 +467,6 @@
                     refname={fact, facts},
                     Refname={Fact, Facts},
                 ]{fact*}
-
-                % Definition box
-                \mdfdefinestyle{allandarkblueboxnotitle}{
-                    skipabove = 0.5cm,
-                    skipbelow = 0.5cm,
-                    leftmargin = 0cm,
-                    rightmargin = 0cm,
-                    innertopmargin = 8pt,
-                    innerbottommargin = 8pt,
-                    linewidth = 1.5pt,
-                    roundcorner = 10pt,
-                    linecolor = allandarkblue,
-                    nobreak = true,
-                    backgroundcolor = allandarkblue!8!allanblue!5,
-                }
-                \declaretheoremstyle[
-                    headfont=\bfseries\large\sffamily\color{allandarkblue},
-                    bodyfont=\normalfont,
-                    headpunct={\hspace{0.3em}---},
-                    postheadspace=0.3em,
-                    mdframed={style=allandarkblueboxnotitle},
-                ]{allandefinitiondarkbluebox}
-                \declaretheorem[
-                    style=allandefinitiondarkbluebox,
-                    name=Definition,
-                    % thmbox = M,
-                    numberwithin=section,
-                    refname={definition, definitions},
-                    Refname={Definition, Definitions},
-                ]{definition}
-                \declaretheorem[
-                    style=allanclaimorangebox,
-                    name=Definition,
-                    numbered = no,
-                    refname={definition, definitions},
-                    Refname={Definition, Definitions},
-                ]{definition*}
 
                 % Remark quotebox
                 \mdfdefinestyle{allanblackquotebox}{
@@ -615,6 +626,32 @@
             \else
 
             \fi
+        \fi
+
+        \ifallanbib                                                     % The following is directly copied from Evan Chen's evan.sty
+            \usepackage[backend=biber,backref=true,style=alphabetic]{biblatex}
+
+            \DeclareFieldFormat{labelalpha}{\textbf{\small #1}}         % citation ID's in small-bold
+            \DefineBibliographyStrings{english}{                        %
+            backrefpage  = {cited p.},                                  % for single page number
+            backrefpages = {cited pp.}                                  % for multiple page numbers
+            }
+            \DeclareFieldFormat{journaltitle}{\mkbibemph{#1},}          % italic journal title with comma
+            \DeclareFieldFormat[inbook,thesis]{title}{\mkbibemph{#1}\addperiod} % italic title with period
+            \DeclareFieldFormat[article]{title}{#1}                     % title of journal article is printed as normal text
+            \DeclareFieldFormat[article]{volume}{\textbf{#1}\addcolon\space}    % bold volume numbers
+
+            % Separate ISBN-13 field
+            \DeclareSourcemap{\maps[datatype=bibtex]{\map{\step[fieldsource=ISBN-13,fieldtarget=ISBN]}}}
+
+            % Evan likes small caps for bibliography author names
+            \renewcommand{\mkbibnamegiven}[1]{\textsc{#1}}
+            \renewcommand{\mkbibnamefamily}[1]{\textsc{#1}}
+            \renewcommand{\mkbibnameprefix}[1]{\textsc{#1}}
+            \renewcommand{\mkbibnamesuffix}[1]{\textsc{#1}}
+
+            % Drop trailing punctuation in bibliography names
+            \renewcommand{\finentrypunct}{}
         \fi
     \fi
 
