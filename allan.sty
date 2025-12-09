@@ -183,6 +183,7 @@
     \newcommand{\DD}{\mathbb{D}} % unit disk
     \newcommand{\EE}{\mathbb{E}} % quantum dilogarithm
     \newcommand{\FF}{\mathbb{F}} % complete system of residues
+    \newcommand{\JJ}{\mathbb{J}} % Rotation map
     \newcommand{\HH}{\mathbb{H}} % upper complex plane
     \newcommand{\KK}{\mathbb{K}} % real or complex field (common notation used in vector spaces)
     \newcommand{\NN}{\mathbb{N}} % natural number field (1, 2, ...)
@@ -190,6 +191,7 @@
     \newcommand{\QQ}{\mathbb{Q}} % rational number field
     \newcommand{\RR}{\mathbb{R}} % real number field
     \newcommand{\UNS}{\mathbb{S}} % unit circle
+    \newcommand{\TT}{\mathbb{T}} % unit circle
     \newcommand{\ZZ}{\mathbb{Z}} % integer field
 
     % More script letters etc.
@@ -236,11 +238,13 @@
     \newcommand{\KB}{\mathfrak B}
     \newcommand{\KE}{\mathfrak E}   % Euclidean metric
     \newcommand{\kg}{\mathfrak g}   % Riemannian metric
+    \newcommand{\KG}{\mathfrak G}   % Operator graph
     \newcommand{\km}{\mathfrak m}
     \newcommand{\KM}{\mathfrak M}
     \newcommand{\KN}{\mathfrak N}
     \newcommand{\kp}{\mathfrak p}
     \newcommand{\kq}{\mathfrak q}
+    \newcommand{\kr}{\mathfrak r}   % Diagonal reflection map of operator graph
     \newcommand{\ks}{\mathfrak S}
     \newcommand{\KU}{\mathfrak U}
 
@@ -605,6 +609,87 @@
                     Refname = {Convention, Conventions},
                 ]{convention*}
 
+                % Motivation environment
+                % 1. The Elegant Left-Bar Style
+                \mdfdefinestyle{qt_elegant_leftbar_orange}{
+                    skipabove = 0.5cm,
+                    skipbelow = 0.5cm,
+                    leftmargin = 0cm,
+                    rightmargin = 0cm,
+                    innertopmargin = 5pt,
+                    innerbottommargin = 5pt,
+                    innerleftmargin = 10pt,
+                    innerrightmargin = 5pt,
+                    linewidth = 2pt,
+                    topline = false,
+                    rightline = false,
+                    bottomline = false,
+                    leftline = true,
+                    linecolor = allanorange,
+                    backgroundcolor = allanorange!4,
+                    nobreak = true,
+                }
+
+                % 2. The Theorem Style Definition
+                \declaretheoremstyle[
+                    headfont = \bfseries\sffamily\color{allanorange},
+                    bodyfont = \normalfont,
+                    headpunct = {},
+                    postheadspace = \newline,
+                    mdframed = {style=qt_elegant_leftbar_orange},
+                ]{qt_motivation_style_orange}
+
+                % 3. The Environment Definition
+                % Changed environment name from {qtsolve} to {motivation}
+                \declaretheorem[
+                    style = qt_motivation_style_orange,
+                    name = Motivating question,              % The title displayed in the PDF
+                    refname = {motivation, motivations},
+                    Refname = {Motivation, Motivations},
+                    numbered = no,                  % Motivations usually aren't numbered
+                ]{motivation}
+
+
+                % Caveat environment
+                % 1. The Elegant Left-Bar Style
+                \mdfdefinestyle{qt_elegant_leftbar_purple}{
+                    skipabove = 0.5cm,
+                    skipbelow = 0.5cm,
+                    leftmargin = 0cm,
+                    rightmargin = 0cm,
+                    innertopmargin = 5pt,
+                    innerbottommargin = 5pt,
+                    innerleftmargin = 10pt,
+                    innerrightmargin = 5pt,
+                    linewidth = 2pt,
+                    topline = false,
+                    rightline = false,
+                    bottomline = false,
+                    leftline = true,
+                    linecolor = allanpurple,
+                    backgroundcolor = allanpurple!4,
+                    nobreak = true,
+                }
+
+                % 2. The Theorem Style Definition
+                \declaretheoremstyle[
+                    headfont = \bfseries\sffamily\color{allanpurple},
+                    bodyfont = \normalfont,
+                    headpunct = {},
+                    postheadspace = \newline,
+                    mdframed = {style=qt_elegant_leftbar_purple},
+                ]{qt_motivation_style_purple}
+
+                % 3. The Environment Definition
+                % Changed environment name from {qtsolve} to {motivation}
+                \declaretheorem[
+                    style = qt_motivation_style_purple,
+                    name = Caveat,              % The title displayed in the PDF
+                    refname = {caveat, caveats},
+                    Refname = {Caveat, Caveats},
+                    numbered = no,                  % Motivations usually aren't numbered
+                ]{caveat}
+
 
                 % Historical note box
                 \mdfdefinestyle{allancadetbluebox}{%
@@ -692,6 +777,10 @@
 
     \ifallanfancy
         \usepackage{fancyhdr}
+        % \usepackage{indentfirst}
+        % \let\@oldpar\par
+        % \def\par{\ifvmode\@oldpar\@afterindentfalse\else\@oldpar\fi}
+
         \fancyhf{}      % clear all header and footer fields
         \renewcommand{\headrulewidth}{0.5pt}    % macro of fancyhdr instead of a length register so must be used in a renewcommand
         \renewcommand{\footrulewidth}{0.0pt}
