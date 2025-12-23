@@ -187,6 +187,7 @@
     \newcommand{\HH}{\mathbb{H}} % upper complex plane
     \newcommand{\KK}{\mathbb{K}} % real or complex field (common notation used in vector spaces)
     \newcommand{\NN}{\mathbb{N}} % natural number field (1, 2, ...)
+    \newcommand{\OO}{\mathbb{O}} % octonians
     \newcommand{\PP}{\mathbb{P}} % prime field
     \newcommand{\QQ}{\mathbb{Q}} % rational number field
     \newcommand{\RR}{\mathbb{R}} % real number field
@@ -643,7 +644,7 @@
                 % Changed environment name from {qtsolve} to {motivation}
                 \declaretheorem[
                     style = qt_motivation_style_orange,
-                    name = Motivating question,              % The title displayed in the PDF
+                    name = Motivation,              % The title displayed in the PDF
                     refname = {motivation, motivations},
                     Refname = {Motivation, Motivations},
                     numbered = no,                  % Motivations usually aren't numbered
@@ -689,6 +690,46 @@
                     Refname = {Caveat, Caveats},
                     numbered = no,                  % Motivations usually aren't numbered
                 ]{caveat}
+
+                % Takeaway environment
+                % 1. The Elegant Left-Bar Style
+                \mdfdefinestyle{qt_elegant_leftbar_blue}{
+                    skipabove = 0.5cm,
+                    skipbelow = 0.5cm,
+                    leftmargin = 0cm,
+                    rightmargin = 0cm,
+                    innertopmargin = 5pt,
+                    innerbottommargin = 5pt,
+                    innerleftmargin = 10pt,
+                    innerrightmargin = 5pt,
+                    linewidth = 2pt,
+                    topline = false,
+                    rightline = false,
+                    bottomline = false,
+                    leftline = true,
+                    linecolor = allanblue,
+                    backgroundcolor = allanblue!4,
+                    nobreak = true,
+                }
+
+                % 2. The Theorem Style Definition
+                \declaretheoremstyle[
+                    headfont = \bfseries\sffamily\color{allanblue},
+                    bodyfont = \normalfont,
+                    headpunct = {},
+                    postheadspace = \newline,
+                    mdframed = {style=qt_elegant_leftbar_blue},
+                ]{qt_motivation_style_blue}
+
+                % 3. The Environment Definition
+                % Changed environment name from {qtsolve} to {motivation}
+                \declaretheorem[
+                    style = qt_motivation_style_blue,
+                    name = Takeaway,              % The title displayed in the PDF
+                    refname = {takeaway, takeaways},
+                    Refname = {Takeaway, Takeaways},
+                    numbered = no,                  % Motivations usually aren't numbered
+                ]{takeaway}
 
 
                 % Historical note box
